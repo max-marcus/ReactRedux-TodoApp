@@ -39,6 +39,18 @@ For a more in depth explanation, take a look at [Dan Abramov's blog post](https:
 
 
 ## Redux
+![redux-logo](https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67)
+
+
+
+Redux itself is a relatively lightwight library (it adds 2kB to your application), with a few new APIs to learn.
+Its power lies behind how it used to to make your code easy to reason about, run consistently, and simple to test.
+This is done through Redux's three fundamental principles:
+
+* A **single source of truth** contained in a store.
+* **State is read-only**. The only way to change state is though emitting an action.
+* **Changes are made with pure functions** in the form of reducers.
+
 
 ### Actions
 
