@@ -59,3 +59,13 @@ This is done through Redux's three fundamental principles:
 ### Store
 
 ## Getting Started
+
+### Setup
+
+- [ ] Run `npm install` to install all the dependencies. Bower will not be used for front-end dependencies.
+- [ ] Run `npm start` to start your Webpack Development Server, and navigate to `http://localhost:9090`. The server has hot-reloading enabled, so you (mostly) won't need to reload the page when making changes! 
+
+### Testing
+
+- [ ] Run `npm test` in your terminal to test. Edit the test file as your move on. Also make sure to use the browser to test your code's functionality.
+
