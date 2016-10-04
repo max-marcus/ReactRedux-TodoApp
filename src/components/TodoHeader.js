@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
+import AddTodo from './AddTodo';
 
-const TodoHeader = () => (
+const TodoHeader = (props) => (
   <div>
-    <h1>TodoHeader</h1>
+    <h1>Todo List</h1>
+      <AddTodo handleInput={props.handleInput} handleKeyPress={props.handleKeyPress} taskName={props.taskName} />
   </div>
 );
 
