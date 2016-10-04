@@ -29,6 +29,14 @@ This makes it so the resulting code for you component is concise and and clear.
 
 ### Container vs Presentational Components
 
+A common design pattern to follow when creating React components is to seperate them into container and presentational components.
+**Container** components handle the logic in an application (how things work). They handle state, fetch data, and contain the logic that determines what components are rendered.
+They do not actually render any DOM markup themselves, but instead use presentational components to do so.
+**Presentational** components concern themselves with how things look. They have no knowledge of state or how data is being mutated.
+Instead, their only job is to take in data (in the form of props) and render DOM markup. 
+
+For a more in depth explanation, take a look at [Dan Abramov's blog post](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) on the subject. 
+
 
 ## Redux
 
