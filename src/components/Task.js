@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const Task = (props) => (
-  <div>
-    <h1 onClick={props.handleClick}>{props.description} <button onClick={props.handleDelete}> X </button></h1>
-  </div>
-);
+const Task = (props) => {
+  return (
+    <div>
+      <button></button>
+    </div>
+  );
+};
 
 Task.propTypes = {
-  description: PropTypes.string.isRequired,
+  task: PropTypes.object, 
 };
 
 export default Task;

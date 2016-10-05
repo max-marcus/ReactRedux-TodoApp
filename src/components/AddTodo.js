@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 
 const AddTodo = (props) => (
   <div>
-    <input onChange={props.handleInput} onKeyPress={props.handleKeyPress} value={props.taskName} />
+    <input />
   </div>
 );
 
 AddTodo.propTypes = {
-
+  taskName: PropTypes.string,
 };
 
 export default AddTodo;
