@@ -67,5 +67,5 @@ This is done through Redux's three fundamental principles:
 
 ### Testing
 
-- [ ] Run `npm test` in your terminal to test. Edit the test file as your move on. Also make sure to use the browser to test your code's functionality.
+- [ ] Run `TEST=react npm test` or `TEST=redux npm test` in your terminal to test. If that doesn't work try adding 'env' at the beginning of the command. Edit the test file as you move on. Also make sure to use the browser to test your code's functionality.
 
