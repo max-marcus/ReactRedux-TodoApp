@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 
 const Task = (props) => {
   return (
-    <div>
+    <article>
       <button></button>
-    </div>
+    </article>
   );
 };
 
 Task.propTypes = {
-  task: PropTypes.object, 
+  task: PropTypes.object,
 };
 
 export default Task;
