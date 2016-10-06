@@ -28,7 +28,7 @@ describe('<App />', () => {
     });
     const wrapper = mount(
       <Provider store={testStore}>
-        <TodoContainer />
+        <App />
       </Provider>
     );
 
@@ -89,7 +89,7 @@ describe('<TodoContainer />', () => {
     expect(testStore.getState().todo.taskName).to.eql('z');
   });
 
-  it('should add dispath addTaskActionCreator and create new task node upon pressing return key', () => {
+  it('should dispath addTaskActionCreator and create new task node upon pressing return key', () => {
     const testStore = fakeStore({
       todo: {
         tasks: [],
@@ -103,7 +103,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
     expect(testStore.getState().todo.tasks).to.have.length(1);
     const task = testStore.getState().todo.tasks[0];
     expect(task.description).to.eql('z');
@@ -125,7 +125,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: '' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
     expect(testStore.getState().todo.tasks).to.have.length(0);
   });
 
@@ -143,7 +143,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     wrapper.find('span').simulate('click');
     expect(wrapper.find('span').hasClass('strike')).to.be.true;
@@ -163,7 +163,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     wrapper.find('span').simulate('click');
     wrapper.find('span').simulate('click');
@@ -184,7 +184,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     wrapper.find('button').simulate('click');
     expect(testStore.getState().todo.tasks).to.have.length(0);
@@ -252,7 +252,7 @@ describe('<TodoContainer />', () => {
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     expect(Object.keys(wrapper.find(Task).props())).to.have.length(3);
   });
