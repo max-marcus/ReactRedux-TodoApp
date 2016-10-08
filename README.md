@@ -54,6 +54,43 @@ This is done through Redux's three fundamental principles:
 
 ### Actions
 
+Actions describe events that have taken place in an application. They don't (generally) perform any logic or manipulate data. They simply notify the app that some event has occurred and pass along any data relating to that event.
+
+Actions are structured as objects with key-value pairs. The only required key is "type". The type property has a string value that describes the event in plain English. For example, if someone added a name to a (hypothetical) list, we would want to emit an action describing that event and pass along the added name:
+
+```
+// Action object for adding a name to a list
+{ type: 'NAME_ADDED', name: 'Erlich Bachman' }
+```
+
+Now that the action object has been created, we need a way to let our app know that this action has occurred. Redux includes a "dispatch" method that broadcasts actions to the app. Dispatch takes in an action object and emits that action to the application.
+
+```
+// Emit the name added action
+dispatch({ type: 'NAME_ADDED', name: 'Erlich Bachman' })
+```
+
+Creating these action objects throughout an application can get tedious and decentralized. Our code would be much more organized if we could put all of our action objects in one file and just import them into the component where the action would be occurring.
+
+Action creators are functions that return action objects. Instead of writing an action as an object literal, we can instead create a function that will return the action object.
+
+```
+// Add name action creator
+function addName(name) {
+  return {
+    type: 'NAME_ADDED',
+    name,                 // This is just ES6 shorthand for name: name
+  };
+}
+```
+To emit this action, we need to modify our dispatch code slightly to use our action creator instead.
+
+```
+// Emit the name added action using the action creator
+dispatch(addName('Erlich Bachman'))
+```
+Notice that actions and action creators have no physical effect on state. The dispatched action only *describes* an intent to change state.
+
 ### Reducers
 
 ### Store
