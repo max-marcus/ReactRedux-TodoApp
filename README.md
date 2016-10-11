@@ -51,26 +51,27 @@ This is done through Redux's three fundamental principles:
 * **State is read-only**. The only way to change state is though emitting an action.
 * **Changes are made with pure functions** in the form of reducers.
 
+### Store
+
+The Redux store is the "single source of truth", meaning that the store holds all of the application state in one place. All components get their state from the store. 
+
+Stores are typically structured as deeply nested objects.
+
+The store cannot be updated directly, instead it is updated through actions and reducers.
 
 ### Actions
 
-Actions describe events that have taken place in an application. They don't (generally) perform any logic or manipulate data. They simply notify the app that some event has occurred and pass along any data relating to that event.
+Actions describe events that have taken place in an application and an intent to change state. They simply notify the store that some event has occurred and pass along any data relating to that event.
 
-Actions are structured as objects with key-value pairs. The only required key is "type". The type property has a string value that describes the event in plain English. For example, if someone added a name to a (hypothetical) list, we would want to emit an action describing that event and pass along the added name:
+Actions are structured as objects with key-value pairs. The only required key is "type". The type property has a string value that describes the event in plain English. Since these actions will be used throughout the app, each action type should be unique.
+
+As an example, if someone added a name to a (hypothetical) list, we would want to emit an action describing that event and pass along the added name:
 
 ```
 // Action object for adding a name to a list
 { type: 'NAME_ADDED', name: 'Erlich Bachman' }
 ```
-
-Now that the action object has been created, we need a way to let our app know that this action has occurred. Redux includes a "dispatch" method that broadcasts actions to the app. Dispatch takes in an action object and emits that action to the application.
-
-```
-// Emit the name added action
-dispatch({ type: 'NAME_ADDED', name: 'Erlich Bachman' })
-```
-
-Creating these action objects throughout an application can get tedious and decentralized. Our code would be much more organized if we could put all of our action objects in one file and just import them into the component where the action would be occurring.
+Creating these action objects throughout an application can get tedious and decentralized. Our code would be much more organized and easier to update if we could put action objects in one file and just import them into the component where the action would be occurring. 
 
 Action creators are functions that return action objects. Instead of writing an action as an object literal, we can instead create a function that will return the action object.
 
@@ -83,17 +84,39 @@ function addName(name) {
   };
 }
 ```
-To emit this action, we need to modify our dispatch code slightly to use our action creator instead.
+Now we need a way to let our store know that this action has occurred. Redux includes a "dispatch" method that broadcasts actions to the store. Dispatch takes in an action object and emits that action to the application.
 
-```
-// Emit the name added action using the action creator
-dispatch(addName('Erlich Bachman'))
-```
 Notice that actions and action creators have no physical effect on state. The dispatched action only *describes* an intent to change state.
 
 ### Reducers
 
-### Store
+Reducers are the mechanism for updating state. They are pure functions that essentially wait for dispatched actions and update state accordingly. **Reducers must always return state** - even if state was unmodified.
+
+Reducers take two parameters: the previous state and the dispatched action. These parameters should **never be mutated**. So state should essentially be copied, updated (if necessary) and then returned. Libraries like [immutable.js](https://facebook.github.io/immutable-js/) are often used alongside Redux so that objects are not mutated inadvertently.
+
+When an action is dispatched, it is passed to every reducer. If that action is something the reducer is interested in, it can perform some logic and return the updated state. Continuing our 'name added' example, once the name added action has been dispatched, the reducer function would take in the app state and name added action as parameters. Then it would update state (adding the name to a list of names) based on the action being passed in.
+
+```
+function listReducer(state, action) {
+  switch(action.type) {
+    case 'NAME_ADDED':
+      const names = [].concat(state.nameList); // creating a new array
+      names.push(action.name);
+      return Object.assign({}, { nameList: names }); //returning a new state object
+  }
+}
+``` 
+
+Each reducer is called once when the store is being created. Therefore, reducers are where you set the app's initial state.
+
+Given that reducers are pure functions, there are 3 things reducers **never** do:
+1) Mutate its arguments
+2) Perform side effects (like API calls)
+3) Call non-pure functions (Date.now(), Math.random(), etc)
+
+For more information on reducers, refer to the Redux docs.
+A general overview of how to construct a reducer: [](http://redux.js.org/docs/basics/Reducers.html)
+For more complex applications, an app might need more than one reducer, responsible for different pieces of state. This is where CombineReducers comes in handy: [](http://redux.js.org/docs/api/combineReducers.html)
 
 ## Getting Started
 
