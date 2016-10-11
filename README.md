@@ -71,7 +71,7 @@ As an example, if someone added a name to a (hypothetical) list, we would want t
 // Action object for adding a name to a list
 { type: 'NAME_ADDED', name: 'Erlich Bachman' }
 ```
-Creating these action objects throughout an application can get tedious and decentralized. Our code would be much more organized and easier to update if we could put action objects in one file and just import them into the component where the action would be occurring. 
+Creating these action objects throughout an application can get tedious and decentralized. Our code would be much more organized and easier to update if we could put action objects in one file and just import them into the component where the action would be occurring. This is where action creators can be helpful.
 
 Action creators are functions that return action objects. Instead of writing an action as an object literal, we can instead create a function that will return the action object.
 
@@ -86,7 +86,7 @@ function addName(name) {
 ```
 Now we need a way to let our store know that this action has occurred. Redux includes a "dispatch" method that broadcasts actions to the store. Dispatch takes in an action object and emits that action to the application.
 
-Notice that actions and action creators have no physical effect on state. The dispatched action only *describes* an intent to change state.
+Notice that actions and action creators have no physical effect on state. The dispatched action only **describes** an intent to change state.
 
 ### Reducers
 
@@ -110,13 +110,14 @@ function listReducer(state, action) {
 Each reducer is called once when the store is being created. Therefore, reducers are where you set the app's initial state.
 
 Given that reducers are pure functions, there are 3 things reducers **never** do:
-1) Mutate its arguments
-2) Perform side effects (like API calls)
-3) Call non-pure functions (Date.now(), Math.random(), etc)
 
-For more information on reducers, refer to the Redux docs.
-A general overview of how to construct a reducer: [](http://redux.js.org/docs/basics/Reducers.html)
-For more complex applications, an app might need more than one reducer, responsible for different pieces of state. This is where CombineReducers comes in handy: [](http://redux.js.org/docs/api/combineReducers.html)
+1. Mutate its arguments
+2. Perform side effects (like API calls)
+3. Call non-pure functions (Date.now(), Math.random(), etc)
+
+For more information on reducers, refer to the Redux docs:
+- A general overview of how to construct a reducer: http://redux.js.org/docs/basics/Reducers.html
+- For more complex applications, an app might need more than one reducer, responsible for different pieces of state. This is where CombineReducers comes in handy: http://redux.js.org/docs/api/combineReducers.html
 
 ## Getting Started
 
