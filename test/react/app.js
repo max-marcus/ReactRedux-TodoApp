@@ -39,7 +39,7 @@ describe('<TodoContainer />', () => {
   it('should add correct task object to tasks state upon clicking return key', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
     expect(wrapper.state('tasks')).to.have.length(1);
 
     const task = wrapper.state('tasks')[0];
@@ -51,14 +51,14 @@ describe('<TodoContainer />', () => {
   it('should not add task object to tasks state upon clicking return key with no input', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: '' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
     expect(wrapper.state('tasks')).to.have.length(0);
   });
 
   it('should add .strike class to task upon clicking task', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     wrapper.find('span').simulate('click');
     expect(wrapper.find('span').hasClass('strike')).to.be.true;
@@ -67,7 +67,7 @@ describe('<TodoContainer />', () => {
   it('should not have .strike class from task upon clicking task twice', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     wrapper.find('span').simulate('click');
     wrapper.find('span').simulate('click');
@@ -77,8 +77,8 @@ describe('<TodoContainer />', () => {
   it('should delete task from tasks state upon clicking task', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
-    
+    wrapper.find('form').simulate('submit');
+
     wrapper.find('button').simulate('click');
     expect(wrapper.state('tasks')).to.have.length(0);
   });
@@ -101,7 +101,7 @@ describe('<TodoContainer />', () => {
   it('should render Task with proper props', () => {
     const wrapper = mount(<TodoContainer />);
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
-    wrapper.find('input').simulate('keyPress', { which: 13 });
+    wrapper.find('form').simulate('submit');
 
     expect(Object.keys(wrapper.find(Task).props())).to.have.length(3);
   });
