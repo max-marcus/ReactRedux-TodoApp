@@ -130,3 +130,35 @@ For more information on reducers, refer to the Redux docs:
 
 - [ ] Run `TEST=react npm test` or `TEST=redux npm test` in your terminal to test. If that doesn't work try adding 'env' at the beginning of the command. Edit the test file as you move on. Also make sure to use the browser to test your code's functionality.
 
+### Challenges
+
+For this module you'll be creating a todo list - first with React, then with React-Redux. The todo list should have the following hierarchical structure:
+
+````   
+|-- App
+  |-- TodoContainer
+      |-- TodoHeader
+          |-- AddTodo
+      |-- TodoList
+          |-- Task
+````
+
+
+And it should have the following functionality: 
+
+1. If you click enter in the input box when it's not empty it should add a task to the todo list.
+
+2. You should be able to click the task to mark it complete. Completed tasks should move to the bottom of the list.
+
+3. Each task should get its own delete button. Clicking a button next to a task should remove that task from the list.
+
+Refer to the tests for any further clarifications you may have.
+
+### Extensions
+
+1. Use Immutable.js to ensure that state never gets mutated.
+
+2. Store tasks in database of your choice and fetch them onload.
+
+3. Refactor your Node-React calendar to use React-Redux
+
