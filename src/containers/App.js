@@ -9,30 +9,50 @@ class App extends Component {
   render() {
     return (
       <div>
-        <TodoContainer />
+        <TodoContainer
+          tasks={this.props.tasks}
+          taskName={this.props.taskName}
+          changeTaskName={this.props.changeTaskName}
+          addTask={this.props.addTask}
+          toggleDone={this.props.toggleDone}
+          deleteTask={this.props.deleteTask}
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = function(store) {
+const mapStateToProps = (state) => {
   return {
-    tasks: store.tasks,
-    taskName: store.taskName,
+    tasks: state.tasks,
+    taskName: state.taskName,
   };
 };
 
-const mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
-    changeTaskName: (target) => {
-      dispatch(actions.updateTaskActionCreator(target));
+    changeTaskName: (taskName) => {
+      dispatch(actions.updateTaskActionCreator(taskName));
     },
-    addTask: ()
-  }
-}
-
-App.propTypes = {
-
+    addTask: (task) => {
+      dispatch(actions.addTaskActionCreator(task));
+    },
+    toggleDone: (index) => {
+      dispatch(actions.markTaskActionCreator(index));
+    },
+    deleteTask: (index) => {
+      dispatch(actions.deleteTaskActionCreator(index));
+    },
+  };
 };
 
-export default App;
+App.propTypes = {
+  tasks: React.PropTypes.arrayOf(React.PropTypes.object),
+  taskName: React.PropTypes.string,
+  changeTaskName: React.PropTypes.func,
+  addTask: React.PropTypes.func,
+  toggleDone: React.PropTypes.func,
+  deleteTask: React.PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
