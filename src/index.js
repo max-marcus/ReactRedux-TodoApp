@@ -1,9 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+
+import store from './store';
 import App from './containers/App';
 
-render(<AppContainer><App /></AppContainer>, document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <AppContainer>
+      <App />
+    </AppContainer>
+  </Provider>
+  , document.getElementById('app')
+);
 
 if (module.hot) {
   module.hot.accept('./containers/App', () => {
