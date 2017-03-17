@@ -2,16 +2,15 @@ import React, { PropTypes } from 'react';
 import Task from './Task';
 
 const TodoList = (props) => {
-  const tasks = props.tasks.map((task, i) => {
-    return (
-      <Task
-        key={i}
-        task={task}
-        deleteTask={props.deleteTask}
-        toggleDone={props.toggleDone}
-      />
-    );
-  });
+  const tasks = props.tasks.map((task, i) => (
+    <Task
+      key={i}
+      task={task}
+      index={i}
+      toggleDone={props.toggleDone}
+      deleteTask={props.deleteTask}
+    />
+  ));
 
   return (
     <div>
@@ -21,7 +20,7 @@ const TodoList = (props) => {
 };
 
 TodoList.propTypes = {
-  tasks: PropTypes.array,
+  tasks: PropTypes.arrayOf(React.PropTypes.object),
   deleteTask: PropTypes.func,
   toggleDone: PropTypes.func,
 };

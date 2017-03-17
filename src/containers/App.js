@@ -1,38 +1,31 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TodoContainer from './TodoContainer';
-import store from './../store';
-import * as types from './../actions/actionTypes';
 import * as actions from './../actions/todoActions';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <TodoContainer />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = function(store) {
+const mapStateToProps = (state) => {
   return {
-    tasks: store.tasks,
-    taskName: store.taskName,
+    tasks: state.todo.tasks,
+    taskName: state.todo.taskName,
   };
 };
 
-const mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
-    changeTaskName: (target) => {
-      dispatch(actions.updateTaskActionCreator(target));
+    changeTaskName: (taskName) => {
+      dispatch(actions.updateTaskActionCreator(taskName));
     },
-    addTask: ()
-  }
-}
-
-App.propTypes = {
-
+    addTask: (task) => {
+      dispatch(actions.addTaskActionCreator(task));
+    },
+    toggleDone: (index) => {
+      dispatch(actions.markTaskActionCreator(index));
+    },
+    deleteTask: (index) => {
+      dispatch(actions.deleteTaskActionCreator(index));
+    },
+  };
 };
+
+const App = connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
 
 export default App;
