@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Task from './Task';
 
 const TodoList = (props) => {
+  console.log('todo list props: ', props);
   const tasks = props.tasks.map((task, i) => (
     <Task
       key={i}

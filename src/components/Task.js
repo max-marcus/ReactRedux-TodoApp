@@ -12,7 +12,11 @@ const Task = (props) => {
 };
 
 Task.propTypes = {
-  task: PropTypes.object,
+  task: PropTypes.objectOf({
+    description: PropTypes.string,
+    isDone: PropTypes.bool,
+    createdAt: PropTypes.string,
+  }),
   deleteTask: PropTypes.func,
   toggleDone: PropTypes.func,
 };

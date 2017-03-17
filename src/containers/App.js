@@ -1,31 +1,11 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TodoContainer from './TodoContainer';
-import store from './../store';
-import * as types from './../actions/actionTypes';
 import * as actions from './../actions/todoActions';
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <TodoContainer
-          tasks={this.props.tasks}
-          taskName={this.props.taskName}
-          changeTaskName={this.props.changeTaskName}
-          addTask={this.props.addTask}
-          toggleDone={this.props.toggleDone}
-          deleteTask={this.props.deleteTask}
-        />
-      </div>
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks,
-    taskName: state.taskName,
+    tasks: state.todo.tasks,
+    taskName: state.todo.taskName,
   };
 };
 
@@ -46,13 +26,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-App.propTypes = {
-  tasks: React.PropTypes.arrayOf(React.PropTypes.object),
-  taskName: React.PropTypes.string,
-  changeTaskName: React.PropTypes.func,
-  addTask: React.PropTypes.func,
-  toggleDone: React.PropTypes.func,
-  deleteTask: React.PropTypes.func,
-};
+const App = connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
+export default App;

@@ -17,27 +17,13 @@ const TodoContainer = (props) => (
   </div>
 );
 
-  // toggleDone(task) {
-  //   const tasks = [].concat(this.state.tasks);
-  //   const index = tasks.indexOf(task);
-  //   tasks[index].isDone = !tasks[index].isDone;
-  //   this.setState({ tasks });
-  // }
-
-  // deleteTask(task) {
-  //   const tasks = [].concat(this.state.tasks);
-  //   const index = tasks.indexOf(task);
-  //   tasks.splice(index, 1);
-  //   this.setState({ tasks });
-  // }
-
 TodoContainer.propTypes = {
-  tasks: React.PropTypes.arrayOf(React.PropTypes.object),
-  taskName: React.PropTypes.string,
-  changeTaskName: React.PropTypes.func,
-  addTask: React.PropTypes.func,
-  toggleDone: React.PropTypes.func,
-  deleteTask: React.PropTypes.func,
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  taskName: PropTypes.string,
+  changeTaskName: PropTypes.func,
+  addTask: PropTypes.func,
+  toggleDone: PropTypes.func,
+  deleteTask: PropTypes.func,
 };
 
 export default TodoContainer;
