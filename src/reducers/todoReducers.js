@@ -12,13 +12,13 @@ function todoReducer(state = initialState, action) {
     case types.ADD_TASK:
       return Object.assign({}, state, { tasks: [...state.tasks, action.task], taskName: '' });
     case types.DELETE_TASK:
-      return Object.assign({}, state, { tasks: state.tasks.splice(action.index, 1) });
+      return Object.assign({}, state, { tasks: state.tasks.slice(0, action.index).concat(state.tasks.slice(action.index + 1)) });
     case types.MARK_COMPLETED:
       return Object.assign({}, state, {
         tasks: state.tasks.map((task, i) => {
           if (i === action.index) {
             return Object.assign({}, task, {
-              isDone: true,
+              isDone: !task.isDone,
             });
           }
           return task;
