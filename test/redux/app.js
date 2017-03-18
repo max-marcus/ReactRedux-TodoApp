@@ -254,7 +254,7 @@ describe('<TodoContainer />', () => {
     wrapper.find('input').simulate('change', { target: { value: 'z' } });
     wrapper.find('form').simulate('submit');
 
-    expect(Object.keys(wrapper.find(Task).props())).to.have.length(3);
+    expect(Object.keys(wrapper.find(Task).props())).to.have.length(4);
   });
 });
 
