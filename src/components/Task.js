@@ -5,7 +5,10 @@ const Task = (props) => {
 
   return (
     <article>
-      <span className={task.isDone ? 'strike' : ''} onClick={() => { toggleDone(index); }}>{task.description}</span>
+      <span
+        className={task.isDone ? 'strike' : ''}
+        onClick={() => { toggleDone(index); }}
+      >{task.description}</span>
       <button onClick={() => { deleteTask(index); }}>Delete</button>
     </article>
   );
